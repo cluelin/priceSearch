@@ -1,7 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
 import openpyxl
-from openpyxl.worksheet.hyperlink import Hyperlink
 import logging
 import json
 import threading
