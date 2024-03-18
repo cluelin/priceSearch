@@ -70,6 +70,7 @@ def save(wb, filename, price_matrix):
             sheet.cell(index+2 , result_term_index, item.get('title'))
             sheet.cell(index+2, result_price_index, item.get('price'))
             cell = sheet.cell(index+2, result_url_index, item.get('link'))
+            cell.hyperlink = None
             # cell.hyperlink = item.get('link')
             # cell.style = "Hyperlink"
 
