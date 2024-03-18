@@ -1,0 +1,30 @@
+Sub OpenEdge(url)
+    Dim edgePath As String
+    'Dim url As String
+    Dim chromeProcess As Object
+    
+    ' 크롬 실행 파일 경로 지정
+    edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    
+    ' 열고자 하는 웹 페이지의 URL
+    'url = "https://search.shopping.naver.com/gate.nhn?id=46297021325"
+    
+    ' 크롬 프로세스 시작
+    Set edgeProcess = CreateObject("WScript.Shell")
+    edgeProcess.Run """" & edgePath & """ """ & url & """", 1, False
+    
+    ' 크롬 프로세스 객체 해제
+    Set edgeProcess = Nothing
+End Sub
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+ 
+    If Target.Cells.Count > 1 Or IsEmpty(Target) Or Target.Column <> 4 Or Target.Row = 1 Then
+        Exit Sub
+    Else
+        Call OpenEdge(Target.Value)
+    End If
+ 
+End Sub
+
+

@@ -47,13 +47,15 @@ def search_on_engine(term_list:list, search_result_list, start_index, end_index)
 
 def read(filename):
     # 엑셀 파일 열기
-    wb = openpyxl.load_workbook(filename)
+    wb = openpyxl.load_workbook(filename, read_only=False, keep_vba=True)
     sheet = wb.active
 
     search_term_list = []
     # 데이터 검색 및 결과 엑셀에 저장
     for row in range(2, sheet.max_row + 1):
         search_term = sheet.cell(row, search_term_index).value  # 엑셀에서 검색어 가져오기
+        if search_term is None:
+            break
         search_term_list.append(search_term)
 
     return search_term_list, wb
@@ -68,8 +70,8 @@ def save(wb, filename, price_matrix):
             sheet.cell(index+2 , result_term_index, item.get('title'))
             sheet.cell(index+2, result_price_index, item.get('price'))
             cell = sheet.cell(index+2, result_url_index, item.get('link'))
-            cell.hyperlink = item.get('link')
-            cell.style = "Hyperlink"
+            # cell.hyperlink = item.get('link')
+            # cell.style = "Hyperlink"
 
     # 변경 내용을 저장하고 파일 닫기
     wb.save(filename)
@@ -104,7 +106,7 @@ def search_multi(search_term_list):
 # 메인 함수
 def main():
     # 검색을 실행할 엑셀 파일과 쿼리를 설정
-    filename = "data.xlsx"
+    filename = "data.xlsm"
 
     start_time = time.time()
 
