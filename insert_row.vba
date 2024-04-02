@@ -39,9 +39,11 @@ Sub InsertRow()
     Dim item As Variant
     For Each item In MyList
         Cells.Find(What:=item, LookIn:=xlValues, LookAt:=xlWhole).Select
+        Rows(Selection.Row).Select
         Selection.Insert Shift:=xlDown
     Next item
     
 End Sub
+
 
 
